@@ -3,7 +3,6 @@ import smtplib
 from email.mime.text import MIMEText
 from datetime import datetime, timedelta, date
 import time
-from binance.client import Client
 from forex_python.converter import CurrencyRates
 import requests
 
