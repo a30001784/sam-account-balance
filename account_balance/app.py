@@ -1,8 +1,7 @@
 import requests
 import smtplib
 from email.mime.text import MIMEText
-from datetime import datetime, timedelta, date
-import time
+from datetime import datetime
 from forex_python.converter import CurrencyRates
 
 
