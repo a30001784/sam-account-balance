@@ -20,4 +20,4 @@ jobs:
 # Run Unit tests- Specify unit tests here 
 
 # sam deploy
-      - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name sam-hello-world --s3-bucket sam-serverless-2023 --capabilities CAPABILITY_IAM --region ap-southeast-2
+      - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name sam-account-balance --s3-bucket sam-serverless-2023 --capabilities CAPABILITY_IAM --region ap-southeast-2
