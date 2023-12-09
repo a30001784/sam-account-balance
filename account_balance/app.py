@@ -4,7 +4,6 @@ from email.mime.text import MIMEText
 from datetime import datetime, timedelta, date
 import time
 from forex_python.converter import CurrencyRates
-import requests
 
 
 # Example usage
