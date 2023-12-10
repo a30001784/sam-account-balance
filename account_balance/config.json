@@ -1,4 +1,16 @@
 {
-    "ticker": "OPEN",
-    "position": "738"
+    "usstock": {
+        "name": "OPEN",
+        "position": "738"
+    },
+    "bitcoin":{
+        {
+            "name":"DOGEUSDT",
+            "position": "738"
+        },
+        {
+            "name":"ONEUSDT",
+            "position": "738"
+        }
+    }
 }

@@ -111,19 +111,12 @@ def cmd_email():
         print('Email sent successfully.')
     else:
         print(f'Error sending email: {result}')
+    return result
 
 def cmd_ustock():
     config = read_config()
     if config is None:
         return
-
-    # Example usage
-    result = login_to_mail_server(config['email'])
-
-    if result == 0:
-        print('Successfully logged onto the mail server.')
-    else:
-        print(f'Error logging onto the mail server: {result}')
 
     # Accessing ticker and position from the config file
     ticker = config.get('ticker')
@@ -156,5 +149,5 @@ def lambda_handler(event, context):
 
         Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
     """
-    cmd_ustock()
+    cmd_email()
     
