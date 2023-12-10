@@ -1,6 +1,7 @@
 import requests
 import smtplib
 import time
+import json
 import configparser
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -43,6 +44,19 @@ def calculate_account_balance(symbols, holding_quantities):
         account_balance += price * holding_quantity
     return account_balance
 
+def read_config(file_path='config.json'):
+    try:
+        with open(file_path, 'r') as file:
+            config = json.load(file)
+
+        return config
+    except FileNotFoundError:
+        print(f'Error: Config file "{file_path}" not found.')
+        return None
+    except json.JSONDecodeError as e:
+        print(f'Error decoding config file: {e}')
+        return None
+
 def send_email(subject, body):
     from_email = '156709406@qq.com'
     to_email = '156709406@qq.com'
@@ -80,6 +94,47 @@ def send_email(subject, body):
         # If there's an error, return the error message
         return str(e)
 
+def cmd_email():
+    #  Calculate daily account balance
+    subject = 'Daily Bitcoin Account Balance'
+    bitcoin_account_balance = calculate_account_balance(symbols, holding_quantities)
+    bitcoin_account_balance_aud = exchange_usd_to_aud(bitcoin_account_balance)
+
+    body1 = f'Daily Account Balance: {bitcoin_account_balance:.2f} USDT'
+    body2 = f'Daily Account Balance: AU${bitcoin_account_balance_aud:.2f}'
+    body = body1 + '\n' + body2
+    
+    # Send the email on the bitcoin account balance
+    result = send_email(subject, body)
+    
+    if result == 0:
+        print('Email sent successfully.')
+    else:
+        print(f'Error sending email: {result}')
+
+def cmd_ustock():
+    config = read_config()
+    if config is None:
+        return
+
+    # Example usage
+    result = login_to_mail_server(config['email'])
+
+    if result == 0:
+        print('Successfully logged onto the mail server.')
+    else:
+        print(f'Error logging onto the mail server: {result}')
+
+    # Accessing ticker and position from the config file
+    ticker = config.get('ticker')
+    position = config.get('position')
+
+    # Pretty-printing the JSON config
+    print('Config:')
+    print(json.dumps(config, indent=2))
+
+    print(f'Ticker: {ticker}, Position: {position}')
+
 def lambda_handler(event, context):
     """Sample pure Lambda function
 
@@ -101,20 +156,5 @@ def lambda_handler(event, context):
 
         Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
     """
-#  Calculate daily account balance
-    subject = 'Daily Bitcoin Account Balance'
-    bitcoin_account_balance = calculate_account_balance(symbols, holding_quantities)
-    bitcoin_account_balance_aud = exchange_usd_to_aud(bitcoin_account_balance)
-
-    body1 = f'Daily Account Balance: {bitcoin_account_balance:.2f} USDT'
-    body2 = f'Daily Account Balance: AU${bitcoin_account_balance_aud:.2f}'
-    body = body1 + '\n' + body2
-    
-    # Send the email on the bitcoin account balance
-    result = send_email(subject, body)
-    
-    if result == 0:
-        print('Email sent successfully.')
-    else:
-        print(f'Error sending email: {result}')
+    cmd_ustock()
     
