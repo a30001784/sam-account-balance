@@ -139,7 +139,7 @@ def cmd_email():
         print(f'Error sending email: {result}')
     return result
 
-def handler_name(event, context): 
+def lambda_handler(event, context): 
 
     cmd_email()
 
