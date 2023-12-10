@@ -139,17 +139,17 @@ def cmd_email():
         print(f'Error sending email: {result}')
     return result
 
-def lambda_handler(event, context): 
+# def lambda_handler(event, context):
+#
+#     cmd_email()
 
+
+def main():
     cmd_email()
 
-    # Save the result of daily account balance to CSV file
-    # save_daily_account_balance_to_csv(daily_balance)
 
-    # Plot the account balance
-    # csv_file = 'daily_account_balances.csv'
-    # dates, balances = read_daily_account_balance_from_csv(csv_file)
-    # draw_daily_account_balance(dates, balances)
+if __name__ == "__main__":
+    main()
 
 
 
