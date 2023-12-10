@@ -115,6 +115,7 @@ def cmd_email():
     print(f'Daily Bitcoin Account Balance: {bitcoin_account_balance:.2f} USDT')
     print(f'Daily Bitcoin Account Balance: AU${bitcoin_account_balance_aud:.2f}')
 
+
     #### Account balance for US Stock ##########
     body1 = f'US Stock Balance: US${us_stock_balance:.2f}'
     body2 = f'US Stock Balance: AU${us_stock_balance_aud:.2f}'
@@ -127,6 +128,8 @@ def cmd_email():
     values.append(us_stock_balance_aud)
     total_balance = sum(values)
     body5 = f'Total Balance: AU${total_balance:.2f}'
+
+    print(f'Total Account Balance: AU${total_balance:.2f}')
 
     body = body1 + '\n' + body2 + '\n' + body3 + '\n' + body4 + '\n' + body5
 
