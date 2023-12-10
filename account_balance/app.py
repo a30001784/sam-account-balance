@@ -1,6 +1,7 @@
 import requests
 import smtplib
 import time
+import configparser
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime
@@ -9,8 +10,11 @@ from forex_python.converter import CurrencyRates
 
 # Example usage
 symbols = ['ONEUSDT', 'DOGEUSDT']
-holding_quantities = [346998, 121266]            # as of 28/06/2023
+holding_quantities = [346998, 121266]            # as of 01/12/2023
 initial_account_balance = 40000
+CONFIG_FILE = './config.ini'
+config = configparser.ConfigParser()
+config.read(CONFIG_FILE)
 
 def fundamental_metric(soup, metric):
     return soup.find(text = metric).find_next(class_='snapshot-td2').text
