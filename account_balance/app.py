@@ -139,7 +139,7 @@ def cmd_email():
         print(f'Error sending email: {result}')
     return result
 
-def main():
+def handler_name(event, context): 
 
     cmd_email()
 
@@ -151,7 +151,5 @@ def main():
     # dates, balances = read_daily_account_balance_from_csv(csv_file)
     # draw_daily_account_balance(dates, balances)
 
-if __name__ == "__main__":
-    main()
 
 
