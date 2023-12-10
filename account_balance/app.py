@@ -100,10 +100,14 @@ def lambda_handler(event, context):
 #  Calculate daily account balance
     subject = 'Daily Bitcoin Account Balance'
     bitcoin_account_balance = calculate_account_balance(symbols, holding_quantities)
+    bitcoin_account_balance_aud = exchange_usd_to_aud(bitcoin_account_balance)
+
     body1 = f'Daily Account Balance: {bitcoin_account_balance:.2f} USDT'
+    body2 = f'Daily Account Balance: AU${bitcoin_account_balance_aud:.2f}'
+    body = body1 + '\n' + body2
     
     # Send the email on the bitcoin account balance
-    result = send_email(subject, body1)
+    result = send_email(subject, body)
     
     if result == 0:
         print('Email sent successfully.')
