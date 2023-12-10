@@ -19,8 +19,5 @@ jobs:
 
 # Run Unit tests- Specify unit tests here 
 
-# sam package
-      - run: sam package --template-file template.yaml --output-template-file packaged.yaml --s3-bucket sam-serverless-2023 --region ap-southeast-2
-
 # sam deploy
       - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name sam-account-balance --s3-bucket sam-serverless-2023 --capabilities CAPABILITY_IAM --region ap-southeast-2
