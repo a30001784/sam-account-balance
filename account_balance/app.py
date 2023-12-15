@@ -9,12 +9,12 @@ from bs4 import BeautifulSoup as bs
 
 # Example usage
 symbols = ['ONEUSDT', 'DOGEUSDT']
-holding_quantities = [346998, 121266]             # as of 20/8/2023
+holding_quantities = [431297, 121266]             # as of 20/8/2023
 initial_account_balance = 40000
 us_stock_position = 4938
 us_stock_ticker = 'open'
 us_stock_metric = 'Price'
-cash = 13453
+cash = 11528
 
 def fundamental_metric(soup, metric):
     return soup.find(text = metric).find_next(class_='snapshot-td2').text
